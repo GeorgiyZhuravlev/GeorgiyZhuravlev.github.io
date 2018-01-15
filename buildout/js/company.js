@@ -45,8 +45,8 @@
 
   $(document).ready(function () {
     var windowUrl = window.location.href;
-    var isLocalHost = /localhost:/.test(windowUrl);
-    var isMockDetails = /\?mock-details/.test(windowUrl);
+    var isLocalHost = true || /localhost:/.test(windowUrl);
+    var isMockDetails = true || /\?mock-details/.test(windowUrl);
     window._proworkApiUrl = isLocalHost
         ? 'https://prowork.io/brettclark/api/'
         : windowUrl.split('index.html')[0] + 'api/';
