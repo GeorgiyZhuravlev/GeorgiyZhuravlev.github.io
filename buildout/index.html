@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- set the encoding of your site -->
+  <meta charset="utf-8">
+  <!-- set the viewport width and initial-scale on mobile devices  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>Prowork</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+</head>
+<body class="overflow-hidden">
+<div class="page">
+  <div class="overlay modal-container" style="display: none">
+    <div class="modal">
+      <div class="modal-content modal-content-success" style="display: none">
+        <div class="modal-icon-holder">
+          <i class="modal-icon ci-check-circle"></i>
+        </div>
+        <div class="modal-text-holder">
+          <p class="modal-text">
+            Your message was sent<br>
+            We'll be in touch with you shortly.<br>
+          </p>
+        </div>
+      </div>
+      <div class="modal-content modal-content-error" style="display: none">
+        <div class="modal-icon-holder">
+          <i class="modal-icon ci-times-circle"></i>
+        </div>
+        <div class="modal-text-holder">
+          <p class="modal-text">
+            Unable to send the message.<br>
+            Are you connected to the internet?<br>
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="button button-primary modal-button"
+                id="btn-close-confirmation">Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="overlay loader"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 d-flex">
+        <div class="gallery-container">
+
+          <div class="gallery">
+
+            <div class="gallery-section gallery-section-template"
+                 id="month_Year" style="display: none;">
+
+              <div class="gallery-overlay">
+
+                <p id="details_empty_gallery_prompt">
+                  <!-- No photos yet...<br>Stay tuned! -->
+                </p>
+
+              </div>
+
+              <div class="gallery-section-header">
+                <p class="gallery-section-title">Month Year</p>
+              </div>
+
+              <div class="gallery-items">
+
+                <div class="row">
+
+                  <div class="col-12 gallery-item-big-image" style="display: none;">
+                    <div class="gallery-item gallery-item-tile">
+                      <div class="gallery-photo-container">
+                        <img class="gallery-photo" alt="current photo">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 gallery-item-template" style="display: none;">
+                    <div class="gallery-item gallery-item-tile">
+                      <div class="gallery-photo-container">
+                        <img alt="photo" class="gallery-photo">
+                      </div>
+                    </div>
+                  </div>
+                </div> <!--.row-->
+
+                <div class="owl-carousel carousel-gallery" style="display: none">
+                  <div class="gallery-item owl-carousel-item-template">
+                    <div class="gallery-photo-container">
+                      <img alt="carousel photo" class="gallery-photo">
+                    </div>
+                  </div>
+                </div> <!--.owl-carousel-->
+
+              </div>
+            </div>
+
+          </div> <!--.gallery-->
+
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="sidebar">
+          <div class="sidebar-header">
+            <div class="sidebar-header-inner">
+              <div class="company sidebar-company">
+                  <div class="company-logo-container">
+                    <img id="company_logo" class="img-fluid company-logo"
+                         src="images/logo.png" alt="logo">
+                  </div>
+                  <div class="company-info">
+                    <p class="company-name" id="details_company_name">Company Name</p>
+                    <p class="company-location" id="details_company_tagline"
+                       style="display: none">London, England</p>
+                  </div>
+                </div>
+              <div class="sidebar-actions">
+                <div class="sidebar-action-holder">
+                  <div class="panel panel-bottom">
+                    <button class="button button-static-height button-primary sidebar-action-toggle-form"
+                            id="details_question_prompt">Ask a Question</button>
+                    <div class="panel-inner">
+                      <form class="form-contact sidebar-form-contact" style="display: none">
+                        <div class="form-contact-inputs">
+                          <div class="row">
+                            <div class="col-6 col-md-12">
+                              <div class="form-contact-input-container">
+                                <div class="input">
+                                  <div class="input-inner">
+                                    <input type="text" name="first_name" id="first_name">
+                                    <span class="input-placeholder">First Name</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-12">
+                              <div class="form-contact-input-container">
+                                <div class="input">
+                                  <div class="input-inner">
+                                    <input type="text" name="last_name" id="last_name">
+                                    <span class="input-placeholder">Last Name</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-contact-input-container">
+                            <div class="input input-active---">
+                              <div class="input-inner">
+                                <input type="email" name="email" id="email_address">
+                                <span class="input-placeholder">Email Address</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-contact-input-container">
+                            <div class="input">
+                              <div class="input-inner">
+                                <input type="text" name="phone_number" id="phone_number">
+                                <span class="input-placeholder">Phone Number</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-contact-input-container">
+                            <div class="input">
+                              <div class="input-inner">
+                                <textarea rows="10" id="message"></textarea>
+                                <span class="input-placeholder">Message</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-contact-input-container form-contact-captcha-container">
+                            <div class="g-recaptcha"
+                                 data-sitekey="6LfSPjsUAAAAAKOHV__rsDEwfDipPSZBHS3Dxan5"></div>
+                          </div>
+                        </div>
+                        <div class="form-contact-buttons">
+                          <button type="button"
+                                  class="button button-secondary form-contact-button close-form">Back</button>
+                          <button type="button" id="btn-send-message"
+                                  class="button button-primary form-contact-button">Send</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="sidebar-action-holder sidebar-header-action-holder" id="facebook-actions" style="display: none">
+                  <a class="button button-static-height button-secondary button-secondary-bordered sidebar-action d-none d-md-inline-block"
+                     id="details_facebook_prompt" target="_blank">Follow Us on Facebook</a>
+                  <a class="button-icon d-md-none" target="_blank"><i class="icon ci-facebook-circled"></i></a>
+                </div>
+                <div class="sidebar-action-holder sidebar-header-action-holder d-md-none">
+                  <button class="button-icon sidebar-action-toggle-info"><i class="icon ci-info-circled"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-header-toggle-area d-none d-md-block">
+              <ul class="list-contact sidebar-list-contact">
+                <li class="list-contact-item" style="display: none;">
+                  <p class="list-contact-title">Phone</p>
+                  <a class="list-contact-text" id="details_phone_number">+1 800 321 4321</a>
+                </li>
+                <li class="list-contact-item" style="display: none">
+                  <p class="list-contact-title">Email</p>
+                  <a class="list-contact-text overflow-ellipsis" id="details_email_address">person@company.com</a>
+                </li>
+                <li class="list-contact-item" style="display: none">
+                  <p class="list-contact-title">Address</p>
+                  <p class="list-contact-text" id="details_address">
+                    123 Rocky Mointain Road
+                    <br>
+                    London, England WC2N 5DU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline sidebar-timeline" style="display: none">
+            <p class="timeline-title">Timeline</p>
+            <div class="timeline-inner">
+              <ul class="timeline-items">
+
+                <li class="timeline-item anchor-template" style="display: none">
+                  <div class="timeline-dot"></div>
+                  <a href="#month_Year" class="timeline-link">Month Year</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/ofi.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/sticky-kit.min.js"></script>
+<script src="js/original.plugins.js"></script>
+<script src="js/company.js"></script>
+</body>
+</html>
