@@ -1,9 +1,52 @@
 ;(function () {
 
+  // Mock company details for debugging purpose
+  var mockDetails = {
+    'company_name': 'Brett C Clark',
+    'company_tagline': 'Cambridge, MA\nCambridge, MA\nCambridge, MA\nCambridge, MA\n', /* optional: */
+    'has_logo': true,
+    'address': '245 First Street\nCambridge, MA 02142', /* optional: */
+    'email_address': 'brett@prowork.io', /* optional: */
+    'phone_number': '(802) 339-4600', /* optional: */
+    'phone_number_e164' : "+18027458031", /* optional: */
+    'allow_question': true,
+    'question_prompt': 'Ask a Question', /* optional: */
+    'facebook': 'https://facebook.com', /* optional: */
+    'facebook_prompt': 'Follow Us on Facebook', /* optional: */
+    'empty_gallery_prompt': 'No photos here yet...\nStay tuned!', /* optional: */
+    'photos': /*[] ||*/ function () {
+      var groups = [7, 9, 10, 11].map(function (monthNumber) {
+        var photosNumber = Math.floor(Math.random() * 5 + 2);
+        var date = new Date();
+        date.setMonth(monthNumber);
+        var elem = {
+          date: date.toString()
+        };
+        var result = [];
+        for (var i = 0; i < photosNumber; i++) {
+          result.push(Object.assign({}, elem, {
+            id: '8bf89d83-c900-4680-aa97-de095cd6255e'
+/*
+          '22137bcd-5097-9ae9-cba1-fb109ff313f7' id is missing, can't get image
+          result.push(Object.assign({}, elem, {
+            id: Math.random() > 0.4
+                ? '22137bcd-5097-9ae9-cba1-fb109ff313f7'
+                : '8bf89d83-c900-4680-aa97-de095cd6255e'
+*/
+          }))
+        }
+        return result;
+      });
+      return groups.reduce(function (a, b) { return a.concat(b)}, []);
+    }()
+  };
+  // --
+
+
   $(document).ready(function () {
     var windowUrl = window.location.href;
     var isLocalHost = /localhost:/.test(windowUrl);
-    var isMockDetails = false && /\?mock-details/.test(windowUrl);
+    var isMockDetails = /\?mock-details/.test(windowUrl);
     window._proworkApiUrl = isLocalHost
         ? 'https://prowork.io/brettclark/api/'
         : windowUrl.split('index.html')[0] + 'api/';
@@ -43,9 +86,6 @@
 
   function fillCompanyData(details) {
     console.log('fillCompanyData: ', details);
-    details.show_timeline = details.show_timeline === undefined
-        ? true : details.show_timeline;
-    window._isTimelineVisible = details.show_timeline;
     // no images
     if (!details.photos.length) {
       details.emptyGallery = true;
@@ -120,10 +160,6 @@
             ? window._proworkApiUrl + 'photo?photo_id=logo'
             : 'images/logo.png');
       },
-      'show_timeline': function (isTimelineVisible) {
-        var $timeLineElem = $('.timeline');
-        return toggleHelperFn($timeLineElem, isTimelineVisible && !isMobile());
-      },
       'facebook': function (url) {
         var $facebookElem = $('#facebook-actions');
         $facebookElem.find('a')
@@ -150,10 +186,8 @@
     }
     fillImagesGroups(groups);
     setTimeout(function () {
-      if(window._isTimelineVisible) {
-        initAnchors();
-        initStickyScrollBlock();
-      }
+      initAnchors();
+      initStickyScrollBlock();
       initDataRelated();
       if (isEmptyGallery && details['allow_question'] && !isMobile()) {
         $('.sidebar-action-toggle-form').trigger('click');
@@ -178,9 +212,7 @@
 
   function getImagesGroups(details) {
     return details.photos.reduce(function (result, photo) {
-      var month = window._isTimelineVisible ?
-          getMonthName(photo.dateJS) + ' ' + photo.dateJS.getFullYear()
-          : 'no_need_for_months';
+      var month = getMonthName(photo.dateJS) + ' ' + photo.dateJS.getFullYear();
       var found = result.find(function (v) {
         return v.month === month
       });
@@ -229,11 +261,7 @@
           .clone()
           .attr('id', group.monthId)
           .removeClass(templateGroupClass);
-      $groupBlock.find('.gallery-section-title')
-          .html(group.month)
-          .toggle(window._isTimelineVisible);
-      $groupBlock.find('.gallery-section-header')
-          .css('padding-top', window._isTimelineVisible ? 20 : 0);
+      $groupBlock.find('.gallery-section-title').html(group.month);
 
       var $photoBlockTemplate = $groupBlock.find('.' + templatePhotoClass);
       var $carouselItemTemplate = $groupBlock.find('.' + carouselItemClass);
@@ -521,7 +549,6 @@
         setTimeout(function () { openForm() }, 100);
       }
     }
-    $('.timeline').toggle(window._isTimelineVisible && !isMobile());
   });
 
   // workaround for disabling `pinch to zoom`
